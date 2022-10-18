@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GPS</string>
+    <string name="btn_habilitar">Este botón activa el GPS</string>
+
+    <!--Recursos utiles para la conifugracion de su ventana de dialogo-->
+    <string name="alert_dialog_title">Desea habilitar el GPS?</string>
+    <string name="alert_dialog_description">Esta aplicación necesita utilizar el servicio de GPS. Vaya a hailitarlo.</string>
+    <string name="alert_dialog_button_accept">Habilitar</string>
+    <string name="alert_dialog_button_denny">Ignorar</string>
 </resources>
