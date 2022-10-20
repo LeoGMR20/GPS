@@ -1,20 +1,22 @@
 package com.example.gps
 
-import android.app.Dialog
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.provider.Settings
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.gps.databinding.ActivityMainBinding
-import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +46,59 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.fabGPS.setOnClickListener{
             enableGPSServices()
+        }
+        binding.fabCoords.setOnClickListener {
+            manageLocation()
+        }
+    }
+
+    /*
+        * Seccion: Tratamioento de localizacion
+        * obtencion de coordenadas
+    */
+    @SuppressLint("MissingPermission")
+    private fun manageLocation() {
+        if (hasGPSEnabed()){
+            if (allPermissionsGrantedGPS()) {
+                //solo puede ser tratado si el usuario dio permisos
+                fusedLocation = LocationServices.getFusedLocationProviderClient(this)
+                //Estan configurando un evento que escuche cuando
+                // del sensor GPS se captura datos correctamente
+                fusedLocation.lastLocation.addOnSuccessListener {
+                        location -> requestNewLocationData()
+                }
+            }else{
+                requestPermissionsLocation()
+            }
+        }else{
+            goToEnableGPS()
+        }
+    }
+
+    //OJO: solo usar si estas completamente seguro de que en este punto
+    //garantizas al 100% que el usuario ha dado permisos
+    @SuppressLint("MissingPermission")
+    private fun requestNewLocationData() {
+        //configurar las caracteristicas de nuestra peticion de localizacion
+        //TODO revisar la actualización a versión 21 con método create()
+        var myLocationRequest = LocationRequest.create().apply {
+            priority = Priority.PRIORITY_HIGH_ACCURACY
+            interval = 0
+            fastestInterval  = 0
+            numUpdates = 1
+        }
+        fusedLocation.requestLocationUpdates(myLocationRequest, myLocationCallback, Looper.myLooper())
+    }
+
+    private val myLocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            var myLastLocation: Location? = locationResult.lastLocation
+            if(myLastLocation != null) {
+                binding.apply {
+                    tvLat.text = myLastLocation.latitude.toString()
+                    tvLong.text = myLastLocation.longitude.toString()
+                }
+            }
         }
     }
 

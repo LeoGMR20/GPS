@@ -7,4 +7,5 @@
     <string name="alert_dialog_description">Esta aplicación necesita utilizar el servicio de GPS. Vaya a hailitarlo.</string>
     <string name="alert_dialog_button_accept">Habilitar</string>
     <string name="alert_dialog_button_denny">Ignorar</string>
+    <string name="btn_map">Botón para el mapa</string>
 </resources>
