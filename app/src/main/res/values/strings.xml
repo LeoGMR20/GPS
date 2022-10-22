@@ -8,4 +8,6 @@
     <string name="alert_dialog_button_accept">Habilitar</string>
     <string name="alert_dialog_button_denny">Ignorar</string>
     <string name="btn_map">Botón para el mapa</string>
+    <string name="txt_fullName">Nombre completo</string>
+    <string name="txt_save">Guardar</string>
 </resources>
