@@ -25,10 +25,10 @@
         android:id="@+id/tvPersistencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="@+id/etNombreCompleto"
-        app:layout_constraintStart_toStartOf="@+id/etNombreCompleto"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreCompleto" />
+        android:layout_marginTop="75dp"
+        app:layout_constraintEnd_toEndOf="@+id/etVal"
+        app:layout_constraintStart_toStartOf="@+id/etVal"
+        app:layout_constraintTop_toBottomOf="@+id/etVal" />
 
     <Button
         android:id="@+id/btnGuardar"
@@ -39,4 +39,32 @@
         app:layout_constraintEnd_toEndOf="@+id/tvPersistencia"
         app:layout_constraintStart_toStartOf="@+id/tvPersistencia"
         app:layout_constraintTop_toBottomOf="@+id/tvPersistencia" />
+
+    <Spinner
+        android:id="@+id/spMateriaFav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:contentDescription="@string/txt_Materias"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/etNombreCompleto"
+        app:layout_constraintStart_toStartOf="@+id/etNombreCompleto"
+        app:layout_constraintTop_toBottomOf="@+id/etNombreCompleto" />
+
+    <EditText
+        android:id="@+id/etVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/txt_valoracion"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="@+id/spMateriaFav"
+        app:layout_constraintStart_toStartOf="@+id/spMateriaFav"
+        app:layout_constraintTop_toBottomOf="@+id/spMateriaFav" />
 </androidx.constraintlayout.widget.ConstraintLayout>

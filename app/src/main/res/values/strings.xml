@@ -10,4 +10,6 @@
     <string name="btn_map">Botón para el mapa</string>
     <string name="txt_fullName">Nombre completo</string>
     <string name="txt_save">Guardar</string>
+    <string name="txt_Materias">Materias favoritas</string>
+    <string name="txt_valoracion">Valoración</string>
 </resources>
