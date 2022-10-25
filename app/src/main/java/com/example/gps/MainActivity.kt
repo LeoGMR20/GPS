@@ -127,6 +127,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun calculateDistance(lastLatitude: Double, lastLongitude: Double): Double {
+        var distance = 0.0
+        val earthRadious = 6371 // Kilómetros
+        val diffLatitude = Math.toRadians(lastLatitude - latitud)
+        val diffLongitude = Math.toRadians(lastLongitude - longitud)
+        val sinLatitude = Math.sin(diffLatitude / 2)
+        val sinLongitude = Math.sin(diffLongitude / 2)
+        return distance
+    }
+
     //Evaluar y gestionar si el GPS en el celular está Activo
 
     private fun enableGPSServices() {
