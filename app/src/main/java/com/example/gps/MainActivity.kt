@@ -121,9 +121,9 @@ class MainActivity : AppCompatActivity() {
             //Las direcciones se obtienen en un array de direcciones
             //no importa que solo haya una dirección
             var direcciones = geocoder.getFromLocation(latitud, longitud, 1)
-            binding.tvDireccion.text =direcciones.get(0).getAddressLine(0)
+            binding.tvDireccion.text = direcciones.get(0).getAddressLine(0)
         } catch (e: Exception) {
-            binding.tvDireccion.text = "No se puede obetner dirección"
+            binding.tvDireccion.text = "No se puede obtener dirección"
         }
     }
 
