@@ -50,4 +50,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_dialog_map" />
 
+    <TextView
+        android:id="@+id/tvDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/tvLat"
+        app:layout_constraintStart_toStartOf="@+id/tvLat"
+        app:layout_constraintTop_toBottomOf="@+id/tvLat" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

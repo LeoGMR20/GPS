@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     //Variable que vamos a usar para gestionar el GPS con google play services
     //FusedLocation: fusionar los datos respectivos a GPS en un objeto
     private lateinit var fusedLocation : FusedLocationProviderClient
+    private var latitud: Double = 0.0
+    private var longitud: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,13 +83,18 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     private fun requestNewLocationData() {
         //configurar las caracteristicas de nuestra peticion de localizacion
-        //TODO revisar la actualización a versión 21 con método create()
-        var myLocationRequest = LocationRequest.create().apply {
+        //Version 21 y su nueva manera de configurar un request
+        var myLocationRequest = LocationRequest.Builder(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            1000
+        ).setMaxUpdates(1).build()
+        //Versiones de la 20 para atrás
+        /*var myLocationRequest = LocationRequest.create().apply {
             priority = Priority.PRIORITY_HIGH_ACCURACY
             interval = 0
             fastestInterval  = 0
             numUpdates = 1
-        }
+        }*/
         fusedLocation.requestLocationUpdates(myLocationRequest, myLocationCallback, Looper.myLooper())
     }
 
@@ -94,11 +102,28 @@ class MainActivity : AppCompatActivity() {
         override fun onLocationResult(locationResult: LocationResult) {
             var myLastLocation: Location? = locationResult.lastLocation
             if(myLastLocation != null) {
+                latitud = myLastLocation.latitude
+                longitud = myLastLocation.longitude
                 binding.apply {
-                    tvLat.text = myLastLocation.latitude.toString()
-                    tvLong.text = myLastLocation.longitude.toString()
+                    tvLat.text = latitud.toString()
+                    tvLong.text = longitud.toString()
                 }
+                getAddressName()
             }
+        }
+    }
+
+    private fun getAddressName() {
+        //Se utiliza una clase llamada Geocoder donde van a tener información sobre direcciones
+        //mapeadas en los mapas de Google
+        val geocoder = Geocoder(this)
+        try {
+            //Las direcciones se obtienen en un array de direcciones
+            //no importa que solo haya una dirección
+            var direcciones = geocoder.getFromLocation(latitud, longitud, 1)
+            binding.tvDireccion.text =direcciones.get(0).getAddressLine(0)
+        } catch (e: Exception) {
+            binding.tvDireccion.text = "No se puede obetner dirección"
         }
     }
 
