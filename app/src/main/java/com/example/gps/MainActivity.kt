@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     private var latitud: Double = 0.0
     private var longitud: Double = 0.0
     private var distance: Double = 0.0
+    private var acumulateDistance: Double = 0.0
     private var velocity: Double = 0.0
     private var contador = 0
 
@@ -117,6 +118,8 @@ class MainActivity : AppCompatActivity() {
                         tvLat.text = lastLatitude.toString()
                         tvLong.text = lastLongitude.toString()
                         tvDistancia.text = "$distance mts"
+                        acumulateDistance += distance
+                        tvDistanciaAcumulada.text = "$acumulateDistance mts"
                         tvVelocidad.text = "$velocity Km/h."
                     }
                 }

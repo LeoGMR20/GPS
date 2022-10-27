@@ -80,4 +80,14 @@
         app:layout_constraintStart_toStartOf="@+id/tvDistancia"
         app:layout_constraintTop_toBottomOf="@+id/tvDistancia" />
 
+    <TextView
+        android:id="@+id/tvDistanciaAcumulada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/tvVelocidad"
+        app:layout_constraintStart_toStartOf="@+id/tvVelocidad"
+        app:layout_constraintTop_toBottomOf="@+id/tvVelocidad" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
