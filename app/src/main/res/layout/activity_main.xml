@@ -60,4 +60,24 @@
         app:layout_constraintStart_toStartOf="@+id/tvLat"
         app:layout_constraintTop_toBottomOf="@+id/tvLat" />
 
+    <TextView
+        android:id="@+id/tvDistancia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/tvDireccion"
+        app:layout_constraintStart_toStartOf="@+id/tvDireccion"
+        app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
+
+    <TextView
+        android:id="@+id/tvVelocidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/tvDistancia"
+        app:layout_constraintStart_toStartOf="@+id/tvDistancia"
+        app:layout_constraintTop_toBottomOf="@+id/tvDistancia" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
