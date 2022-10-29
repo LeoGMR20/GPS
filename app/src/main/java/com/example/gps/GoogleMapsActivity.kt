@@ -69,5 +69,29 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //en el centro de la pantalla
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(salarUyuni,10f))
+        /*
+        El zoom en el mapa va de un rango [0,21)
+        se le puede asignar desde 2 a 20
+        a partir de 5: continentes
+        a partir de 10: ciudades o paises
+        a partir de 15: se usa para calles avenidas
+        20: sirve para edificios, casas, parques, domicilios
+        */
+
+        //Los mapas tienen eventos, como los botones.
+        //Se configura listeners que escuchen esos eventos
+        //y resuelvan una acción ante ese evento
+        //El evento más sencillo e importante en los mapas
+        //es el click a cualquier parte del mapa de google
+
+        mMap.setOnMapClickListener {
+            //it es la posición donde haces click con tu dedo
+            mMap.addMarker(MarkerOptions()
+                .title("Nueva ubicación Random")
+                .snippet("${it.latitude},${it.longitude}")
+                .position(it)
+                .draggable(true)
+            )
+        }
     }
 }
