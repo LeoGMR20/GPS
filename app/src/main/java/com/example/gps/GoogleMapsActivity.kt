@@ -40,12 +40,34 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+    /*
+    Aquí ocurre toda la magia
+    cuando el mapa esta listo...
+    cuando el mapa esta listo, les devuelve
+    en un parámetro llamda googleMap, el mapa
+    y todas sus caracteristicas en ese objeto
+    */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        //Las posiciones se manejan en un objeto
+        //que conjunciona latitud y longitud
+        //se llama LatLng
+        val salarUyuni = LatLng(-20.152120, -67.611300)
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        //Marcador
+        //Tachuela roja que se posiciona en el mapa donde quieren ubicarse
+        mMap.addMarker(MarkerOptions()
+            .title("Salar de Uyuni")
+            .snippet("${salarUyuni.latitude},${salarUyuni.longitude}") //Contenido extra
+            .position(salarUyuni)
+        )
+
+        //Colocar la cámara virtual en la posición requerida
+        //en el mapa
+        //La cámara se centra o coloca tus coordenadas
+        //en el centro de la pantalla
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(salarUyuni,10f))
     }
 }
