@@ -34,12 +34,18 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyDQpx9WOuC7PLjbo7UKd8JBbizVsYBnpMo" />
 
         <activity
             android:name=".GoogleMapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_google_maps" />
+            android:exported="true"
+            android:label="@string/title_activity_google_maps" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".PersistenciaActivity"
             android:exported="true">
@@ -50,11 +56,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"

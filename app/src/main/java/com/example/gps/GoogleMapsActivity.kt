@@ -13,6 +13,7 @@ import com.example.gps.databinding.ActivityGoogleMapsBinding
 
 class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    //Es el objeto que va a contener a su mapa de Google
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityGoogleMapsBinding
 
@@ -25,6 +26,8 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
+        //El mapa de Google se carga asincronamente
+        //sin congelar la pantalla o el hilo principal
         mapFragment.getMapAsync(this)
     }
 
