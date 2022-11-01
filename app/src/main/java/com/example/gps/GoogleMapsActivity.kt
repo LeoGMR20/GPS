@@ -2,6 +2,9 @@ package com.example.gps
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
+import com.example.gps.Coordenadas.stadium
+import com.example.gps.Coordenadas.univalle
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,6 +13,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.gps.databinding.ActivityGoogleMapsBinding
+import com.google.android.gms.maps.model.CameraPosition
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -77,6 +83,32 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         a partir de 15: se usa para calles avenidas
         20: sirve para edificios, casas, parques, domicilios
         */
+
+        /*
+        * Configuración personalizada de cámara
+        */
+
+        val camaraPersonalizada = CameraPosition.Builder()
+            .target(univalle)
+            .zoom(17f)
+            .tilt(35f) //ángulo de inclinación de la cámara
+            .bearing(235f) //ángulo para cambio de orientación del norte
+            .build()
+        //mMap.moveCamera(CameraUpdateFactory.newCameraPosition(camaraPersonalizada))
+
+        /*
+         * Movimiento de la cámara
+         * usando corrutinas: similares a hilos o procesos en background
+        */
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(univalle,17f))
+
+        //Uso de corrutinas....
+
+        lifecycleScope.launch {
+            delay(5000)
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stadium, 17f))
+        }
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos
