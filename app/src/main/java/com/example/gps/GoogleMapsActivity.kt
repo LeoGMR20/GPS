@@ -142,7 +142,8 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         lifecycleScope.launch {
             delay(5000)
             for (i in 0..50) {
-                mMap.animateCamera(CameraUpdateFactory.scrollBy(0f,120f))
+                mMap.animateCamera(CameraUpdateFactory.scrollBy(150f,120f))
+                delay(500)
             }
         }
 
