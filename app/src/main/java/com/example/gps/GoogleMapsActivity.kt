@@ -3,7 +3,13 @@ package com.example.gps
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import com.example.gps.Coordenadas.plazaEstudiante
+import com.example.gps.Coordenadas.plazaMurillo
+import com.example.gps.Coordenadas.plazaSanPedro
+import com.example.gps.Coordenadas.plazaSpain
+import com.example.gps.Coordenadas.sanFrancisco
 import com.example.gps.Coordenadas.stadium
+import com.example.gps.Coordenadas.torresMall
 import com.example.gps.Coordenadas.univalle
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -106,8 +112,27 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //Uso de corrutinas....
 
         lifecycleScope.launch {
-            delay(5000)
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stadium, 17f))
+            delay(4000)
+            //transición de movimiento entre dos coordenadas
+            //similar movimiento en el mapa
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(stadium, 17f))
+            delay(3000)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(plazaMurillo, 17f))
+            delay(3000)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sanFrancisco, 17f))
+            delay(3000)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(plazaSanPedro, 17f))
+            delay(3000)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(plazaEstudiante, 17f))
+            delay(3000)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(plazaSpain, 17f))
+            delay(3000)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(torresMall, 17f))
+            mMap.addMarker(MarkerOptions()
+                .title("Destino final")
+                .snippet("${torresMall.latitude},${torresMall.longitude}") //Contenido extra
+                .position(torresMall)
+            )
         }
 
         //Los mapas tienen eventos, como los botones.
