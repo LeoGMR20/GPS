@@ -97,17 +97,17 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val camaraPersonalizada = CameraPosition.Builder()
             .target(univalle)
             .zoom(17f)
-            .tilt(35f) //ángulo de inclinación de la cámara
-            .bearing(235f) //ángulo para cambio de orientación del norte
+            .tilt(45f) //ángulo de inclinación de la cámara
+            .bearing(245f) //ángulo para cambio de orientación del norte
             .build()
-        //mMap.moveCamera(CameraUpdateFactory.newCameraPosition(camaraPersonalizada))
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(camaraPersonalizada))
 
         /*
          * Movimiento de la cámara
          * usando corrutinas: similares a hilos o procesos en background
         */
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(univalle,17f))
+        /*mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(univalle,17f))
 
         //Uso de corrutinas....
 
@@ -133,6 +133,17 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .snippet("${torresMall.latitude},${torresMall.longitude}") //Contenido extra
                 .position(torresMall)
             )
+        }*/
+
+        /*
+        * Movimiento de la cámara por pixeles en pantalla
+        */
+
+        lifecycleScope.launch {
+            delay(5000)
+            for (i in 0..50) {
+                mMap.animateCamera(CameraUpdateFactory.scrollBy(0f,120f))
+            }
         }
 
         //Los mapas tienen eventos, como los botones.
