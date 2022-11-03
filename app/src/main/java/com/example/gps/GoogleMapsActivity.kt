@@ -1,8 +1,11 @@
 package com.example.gps
 
+import android.hardware.Camera
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import com.example.gps.Coordenadas.hospitalHobrero
+import com.example.gps.Coordenadas.lapaz
 import com.example.gps.Coordenadas.plazaEstudiante
 import com.example.gps.Coordenadas.plazaMurillo
 import com.example.gps.Coordenadas.plazaSanPedro
@@ -20,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.gps.databinding.ActivityGoogleMapsBinding
 import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLngBounds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -139,13 +143,31 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         * Movimiento de la cámara por pixeles en pantalla
         */
 
-        lifecycleScope.launch {
+        /*lifecycleScope.launch {
             delay(5000)
             for (i in 0..50) {
                 mMap.animateCamera(CameraUpdateFactory.scrollBy(150f,120f))
                 delay(500)
             }
+        }*/
+
+        /**
+        * Limitación de área de acción del mapa
+        * usando sesgos de coordenadas de acción
+         * esta caracteristica de mapear un área de acción
+         * se conoce como bounds
+        */
+
+        //Bounds necesita dos posiciones: una surOeste y otra noreste que delimintan tu área de acción
+        val lapazBounds = LatLngBounds(torresMall,hospitalHobrero)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lapaz,12f))
+        lifecycleScope.launch{
+            delay(3_500)
+            //De la área que has delimintado tu puedes acceder al punto central del rectángulo imaginario
+            //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lapazBounds.center,18f))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(lapazBounds, 32))
         }
+        mMap.setLatLngBoundsForCameraTarget(lapazBounds)
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos

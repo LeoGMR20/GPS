@@ -11,4 +11,6 @@ object Coordenadas {
     val plazaSanPedro = LatLng(-16.50247523252775, -68.13526164011336)
     val plazaEstudiante = LatLng(-16.50417977098764, -68.1311273001265)
     val plazaSpain = LatLng(-16.514356927724023, -68.1284748001425)
+    val hospitalHobrero = LatLng(-16.499341987698834, -68.11820756730108)
+    val lapaz = LatLng(-16.48892110589471, -68.11743375119276)
 }
