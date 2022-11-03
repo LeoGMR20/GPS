@@ -79,6 +79,15 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .position(salarUyuni)
         )
 
+        /**
+         * Delimintar el zoom permitido en el mapa
+         * */
+
+        mMap.apply {
+            setMinZoomPreference(15f)
+            setMaxZoomPreference(20f)
+        }
+
         //Colocar la cámara virtual en la posición requerida
         //en el mapa
         //La cámara se centra o coloca tus coordenadas
@@ -168,6 +177,18 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(lapazBounds, 32))
         }
         mMap.setLatLngBoundsForCameraTarget(lapazBounds)
+
+        /**
+         * Establecer los controles de UI del mapa y las Gestures
+         */
+
+        mMap.uiSettings.apply {
+            isZoomControlsEnabled = true // Botones + - zoom in zoom out
+            isCompassEnabled = true // la brújula de orientación del mapa
+            isMapToolbarEnabled = true // habilito para un marcador la opción de ir a ver una ruta a verlo en la app Mapa Google
+            isRotateGesturesEnabled = false // deshabilitar la opción de rotación del mapa
+            isZoomControlsEnabled = false // deshabilita las opciones de zoom con los dedos del mapa
+        }
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos
