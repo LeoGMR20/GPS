@@ -187,6 +187,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             isCompassEnabled = true // la brújula de orientación del mapa
             isMapToolbarEnabled = true // habilito para un marcador la opción de ir a ver una ruta a verlo en la app Mapa Google
             isRotateGesturesEnabled = false // deshabilitar la opción de rotación del mapa
+            isTiltGesturesEnabled = false // deshabilitar la opción de rotación de la cámara
             isZoomControlsEnabled = false // deshabilita las opciones de zoom con los dedos del mapa
         }
 
