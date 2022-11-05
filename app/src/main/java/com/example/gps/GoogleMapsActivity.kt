@@ -38,6 +38,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityGoogleMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Utils.binding = binding
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -190,6 +191,10 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             isTiltGesturesEnabled = false // deshabilitar la opción de rotación de la cámara
             isZoomControlsEnabled = false // deshabilita las opciones de zoom con los dedos del mapa
         }
+
+        //establecer un padding al mapa
+
+        mMap.setPadding(0,0,0,Utils.dp(64))// densidad de pixeles en pantalla
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos
