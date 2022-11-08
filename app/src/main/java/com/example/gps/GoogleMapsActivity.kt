@@ -46,6 +46,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //El mapa de Google se carga asincronamente
         //sin congelar la pantalla o el hilo principal
         mapFragment.getMapAsync(this)
+        setupToggleButtons()
     }
 
     /**
@@ -210,6 +211,21 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .position(it)
                 .draggable(true)
             )
+        }
+    }
+
+    private fun setupToggleButtons() {
+        binding.toggleGroup.addOnButtonCheckedListener{
+                group, checkedId, isChecked ->
+            if (isChecked) {
+                mMap.mapType = when(checkedId) {
+                    R.id.btnNormal -> GoogleMap.MAP_TYPE_NORMAL
+                    R.id.btnHibrido -> GoogleMap.MAP_TYPE_HYBRID
+                    R.id.btnSatelital -> GoogleMap.MAP_TYPE_SATELLITE
+                    R.id.btnTerreno -> GoogleMap.MAP_TYPE_TERRAIN
+                    else -> GoogleMap.MAP_TYPE_NONE
+                }
+            }
         }
     }
 }
