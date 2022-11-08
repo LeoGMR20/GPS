@@ -19,11 +19,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.example.gps.databinding.ActivityGoogleMapsBinding
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -196,6 +193,30 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //establecer un padding al mapa
 
         mMap.setPadding(0,0,0,Utils.dp(64))// densidad de pixeles en pantalla
+
+        /**
+         * Estilo personalizado de mapa
+         */
+
+        mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.my_map_style))
+
+        /**
+         * configuracion y personalizacion de marcadores
+         */
+
+        val univalleMarcador = mMap.addMarker(MarkerOptions()
+            .title("Mi universidad")
+            .position(univalle)
+        )
+
+        univalleMarcador?.run {
+            //setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)) //Cambiar color marcador con opciones pro defecto
+            //setIcon(BitmapDescriptorFactory.defaultMarker(86f)) // cambiar color Personalizado
+            setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker)) // Cambiar marcador con diseño personalizado
+            rotation = 145f
+            isFlat = true // el marcador rote o no con el mapa
+            setAnchor(0.5f,0.5f)
+        }
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos
