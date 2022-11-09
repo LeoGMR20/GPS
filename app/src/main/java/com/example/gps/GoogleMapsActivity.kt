@@ -1,5 +1,6 @@
 package com.example.gps
 
+import android.graphics.Color
 import android.hardware.Camera
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -207,7 +208,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
          * configuracion y personalizacion de marcadores
          */
 
-        val univalleMarcador = mMap.addMarker(MarkerOptions()
+        /*val univalleMarcador = mMap.addMarker(MarkerOptions()
             .title("Mi universidad")
             .position(univalle)
         )
@@ -220,7 +221,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
             isFlat = true // el marcador rote o no con el mapa
             setAnchor(0.5f,0.5f)
             isDraggable = true
-        }
+        }*/
 
         //Eventos en marcadores
 
@@ -228,6 +229,13 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
         //Cuando la interfaz a implementar tiene muchos métodos
         //mejor haganlo de la forma tradicional
         mMap.setOnMarkerDragListener(this)
+
+        /**
+         * Trazado de linea areas y circulos en el mapa
+         * trazar un línea entre dos puntos se llama Polyline
+         */
+
+        setupPolyline()
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos
@@ -244,6 +252,18 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 .draggable(true)
             )
         }
+    }
+
+    private fun setupPolyline() {
+        //las líneas Polyline dependen de un arreglo o lista de coordenadas
+        val misRutas = mutableListOf(univalle, stadium, hospitalHobrero)
+        val polyline = mMap.addPolyline(PolylineOptions()
+            .color(Color.YELLOW)
+            .width(10f) //ancho de la línea
+            .clickable(true) //la línea debe ser clickeada
+            .geodesic(true) //curvatura con respecto al radio de la tierra
+        )
+        polyline.points = misRutas
     }
 
     private fun setupToggleButtons() {
