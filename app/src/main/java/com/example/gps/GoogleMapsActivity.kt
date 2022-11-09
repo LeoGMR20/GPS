@@ -234,7 +234,9 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val misRutas2 = mutableListOf(univalle, hospitalHobrero, stadium)
         val misRutas3 = mutableListOf(hospitalHobrero, stadium, plazaMurillo)
 
-        lifecycleScope.launch {
+
+        //trazar rutas en tiempo real simulando movimiento
+        /*lifecycleScope.launch {
             delay(3_500)
             setupPolylineTime(misRutas1)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalHobrero,13f))
@@ -244,7 +246,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
             delay(3_500)
             setupPolylineTime(misRutas3)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(plazaMurillo,13f))
-        }
+        }*/
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos
@@ -272,6 +274,15 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
             .geodesic(true) //curvatura con respecto al radio de la tierra
         )
         polyline.points = ruta
+
+        lifecycleScope.launch{
+            val misRutasEnTiempoReal = mutableListOf<LatLng>()
+            for (punto in ruta){
+                misRutasEnTiempoReal.add(punto)
+                polyline.points = misRutasEnTiempoReal
+                delay(2_000)
+            }
+        }
     }
 
     /*private fun setupPolyline() {
