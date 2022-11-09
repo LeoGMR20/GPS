@@ -3,6 +3,8 @@ package com.example.gps
 import android.hardware.Camera
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.gps.Coordenadas.hospitalHobrero
 import com.example.gps.Coordenadas.lapaz
@@ -24,7 +26,8 @@ import com.google.android.gms.maps.model.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
+    GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener {
 
     //Es el objeto que va a contener a su mapa de Google
     private lateinit var mMap: GoogleMap
@@ -216,7 +219,15 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             rotation = 145f
             isFlat = true // el marcador rote o no con el mapa
             setAnchor(0.5f,0.5f)
+            isDraggable = true
         }
+
+        //Eventos en marcadores
+
+        mMap.setOnMarkerClickListener(this)
+        //Cuando la interfaz a implementar tiene muchos métodos
+        //mejor haganlo de la forma tradicional
+        mMap.setOnMarkerDragListener(this)
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos
@@ -248,5 +259,33 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    //Click al marcador
+    override fun onMarkerClick(marker: Marker): Boolean {
+        //marker es el marcador al que le estas haciendo click
+        Toast.makeText(this, "${marker.position.latitude}, ${marker.position.longitude}", Toast.LENGTH_LONG).show()
+        return false
+    }
+
+    override fun onMarkerDrag(marker: Marker) {
+        //mientras arrastras el marcador
+        //ocultas el menu de botones y haces transparente el marcador
+        binding.toggleGroup.visibility = View.INVISIBLE
+        marker.alpha = 0.4f
+    }
+
+    override fun onMarkerDragEnd(marker: Marker) {
+        //Cuando sueltas el marcador
+        binding.toggleGroup.visibility = View.VISIBLE
+        marker.alpha = 1.0f
+        //los marcadores tienen una ventan de información
+        //se le llama infoWindow
+        marker.showInfoWindow()
+    }
+
+    override fun onMarkerDragStart(marker: Marker) {
+        //cuando empiezas a arrastrar el marcador
+        marker.hideInfoWindow()//oculta la ventana de información
     }
 }
