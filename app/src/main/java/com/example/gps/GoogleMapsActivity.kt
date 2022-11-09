@@ -1,7 +1,6 @@
 package com.example.gps
 
 import android.graphics.Color
-import android.hardware.Camera
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,11 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.gps.Coordenadas.hospitalHobrero
 import com.example.gps.Coordenadas.lapaz
-import com.example.gps.Coordenadas.plazaEstudiante
 import com.example.gps.Coordenadas.plazaMurillo
-import com.example.gps.Coordenadas.plazaSanPedro
-import com.example.gps.Coordenadas.plazaSpain
-import com.example.gps.Coordenadas.sanFrancisco
 import com.example.gps.Coordenadas.stadium
 import com.example.gps.Coordenadas.torresMall
 import com.example.gps.Coordenadas.univalle
@@ -235,7 +230,21 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
          * trazar un línea entre dos puntos se llama Polyline
          */
 
-        setupPolyline()
+        val misRutas1 = mutableListOf(univalle, stadium, hospitalHobrero)
+        val misRutas2 = mutableListOf(univalle, hospitalHobrero, stadium)
+        val misRutas3 = mutableListOf(hospitalHobrero, stadium, plazaMurillo)
+
+        lifecycleScope.launch {
+            delay(3_500)
+            setupPolylineTime(misRutas1)
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hospitalHobrero,13f))
+            delay(3_500)
+            setupPolylineTime(misRutas2)
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stadium,13f))
+            delay(3_500)
+            setupPolylineTime(misRutas3)
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(plazaMurillo,13f))
+        }
 
         //Los mapas tienen eventos, como los botones.
         //Se configura listeners que escuchen esos eventos
@@ -254,17 +263,33 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
         }
     }
 
-    private fun setupPolyline() {
+    private fun setupPolylineTime(ruta: MutableList<LatLng>) {
         //las líneas Polyline dependen de un arreglo o lista de coordenadas
-        val misRutas = mutableListOf(univalle, stadium, hospitalHobrero)
         val polyline = mMap.addPolyline(PolylineOptions()
-            .color(Color.YELLOW)
+            .color(Color.BLUE)
             .width(10f) //ancho de la línea
             .clickable(true) //la línea debe ser clickeada
             .geodesic(true) //curvatura con respecto al radio de la tierra
         )
-        polyline.points = misRutas
+        polyline.points = ruta
     }
+
+    /*private fun setupPolyline() {
+        //las líneas Polyline dependen de un arreglo o lista de coordenadas
+        val misRutas = mutableListOf(univalle, stadium, hospitalHobrero)
+        val polyline = mMap.addPolyline(PolylineOptions()
+            .color(Color.BLUE)
+            .width(10f) //ancho de la línea
+            .clickable(true) //la línea debe ser clickeada
+            .geodesic(true) //curvatura con respecto al radio de la tierra
+        )
+        lifecycleScope.launch {
+            for (ruta in misRutas) {
+                delay(3_500)
+                polyline.points.add(ruta)
+            }
+        }
+    }*/
 
     private fun setupToggleButtons() {
         binding.toggleGroup.addOnButtonCheckedListener{
