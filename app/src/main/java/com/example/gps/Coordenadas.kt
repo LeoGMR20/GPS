@@ -13,4 +13,5 @@ object Coordenadas {
     val plazaSpain = LatLng(-16.514356927724023, -68.1284748001425)
     val hospitalHobrero = LatLng(-16.499341987698834, -68.11820756730108)
     val lapaz = LatLng(-16.48892110589471, -68.11743375119276)
+    val cossmil = LatLng(-16.505126853442416, -68.12027121116179)
 }
