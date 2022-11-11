@@ -20,4 +20,5 @@
     <string name="btn_satelital">Satelital</string>
     <string name="btn_hibrido">Híbrido</string>
     <string name="new_marker_random">Nueva ubicación Random</string>
+    <string name="Img_infoWindow_des">Imagen de un edificio</string>
 </resources>

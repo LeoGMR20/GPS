@@ -70,6 +70,14 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
         //se llama LatLng
         val salarUyuni = LatLng(-20.152120, -67.611300)
 
+        /**
+         *
+         * InfoWindow custom
+         *
+         * */
+
+        mMap.setInfoWindowAdapter(CustomInfoWindowAdapter(this))
+
         //Marcador
         //Tachuela roja que se posiciona en el mapa donde quieren ubicarse
         mMap.addMarker(MarkerOptions()
@@ -77,7 +85,6 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
             .snippet("${salarUyuni.latitude},${salarUyuni.longitude}") //Contenido extra
             .position(salarUyuni)
         )
-
         /**
          * Delimintar el zoom permitido en el mapa
          * */
@@ -271,7 +278,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
             //it es la posición donde haces click con tu dedo
             mMap.addMarker(MarkerOptions()
                 .title("Nueva ubicación Random")
-                .snippet("${it.latitude},${it.longitude}")
+                .snippet("${it.latitude},\n${it.longitude}")
                 .position(it)
                 .draggable(true)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
