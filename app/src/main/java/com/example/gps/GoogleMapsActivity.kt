@@ -274,6 +274,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 .snippet("${it.latitude},${it.longitude}")
                 .position(it)
                 .draggable(true)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
             )
         }
     }
