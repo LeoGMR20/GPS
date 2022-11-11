@@ -19,4 +19,5 @@
     <string name="btn_terreno">Terreno</string>
     <string name="btn_satelital">Satelital</string>
     <string name="btn_hibrido">Híbrido</string>
+    <string name="new_marker_random">Nueva ubicación Random</string>
 </resources>
